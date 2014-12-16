@@ -1,6 +1,6 @@
 {
-  "name": "gate17",
-  "author": "kaustavha",
+  "name": "inter-chat",
+  "author": "Zulfat Ilyasov",
   "devDependencies": {
     "gulp": "latest",
     "gulp-util": "latest",
@@ -12,12 +12,14 @@
     "nib": "latest",
     "gulp-uglify": "latest",
     "express":"latest",
-    "connect-livereload":"latest"
+    "connect-livereload":"latest",
+    "bower":"latest"
   },
   "scripts":{
-    "postinstall": "bower install; gulp build;"
+    "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build"
   },
   "dependencies": {
+    "bower":"latest",
     "gulp-livereload": "^2.1.1"
   }
 }
