@@ -2,7 +2,6 @@
   "name": "inter-chat",
   "author": "Zulfat Ilyasov",
   "devDependencies": {
-    "gulp": "latest",
     "gulp-util": "latest",
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
@@ -20,6 +19,7 @@
   },
   "dependencies": {
     "bower":"latest",
+    "gulp": "latest",
     "gulp-livereload": "^2.1.1"
   }
 }
