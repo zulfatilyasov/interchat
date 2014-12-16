@@ -77,6 +77,7 @@ gulp.task('coffee', function() {
 // Refresh task. Depends on Jade task completion
 gulp.task("refresh", ["jade"], function(){
   livereload.changed();
+  
   console.log('LiveReload is triggered');
 });
 
