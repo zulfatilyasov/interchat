@@ -55,7 +55,7 @@ gulp.task('server', function () {
   var app = express();
   app.use(require('connect-livereload')());
   app.use(express.static(__dirname));
-  app.listen(4000, '0.0.0.0');
+  app.listen(3000, '0.0.0.0');
 });
 
 // Watch sources for change, executa tasks
