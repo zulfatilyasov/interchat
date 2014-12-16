@@ -15,7 +15,7 @@
     "connect-livereload":"latest"
   },
   "scripts":{
-    "postinstall": "bower install; gulp;"
+    "postinstall": "bower install; gulp build;"
   },
   "dependencies": {
     "gulp-livereload": "^2.1.1"
