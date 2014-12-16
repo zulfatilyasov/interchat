@@ -1,7 +1,10 @@
 {
   "name": "inter-chat",
   "author": "Zulfat Ilyasov",
-  "devDependencies": {
+  "dependencies": {
+    "bower":"latest",
+    "gulp": "latest",
+    "gulp-livereload": "^2.1.1",
     "gulp-util": "latest",
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
@@ -16,10 +19,5 @@
   },
   "scripts":{
     "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build"
-  },
-  "dependencies": {
-    "bower":"latest",
-    "gulp": "latest",
-    "gulp-livereload": "^2.1.1"
   }
 }
