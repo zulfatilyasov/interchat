@@ -81,5 +81,6 @@ gulp.task("refresh", ["jade"], function(){
 });
 
 // Define default task
-gulp.task("default", ["jade", "stylus", "coffee", "server", "watch"]);
+gulp.task("build",["jade", "stylus", "coffee", "server"]);
+gulp.task("default", ["build", "watch"]);
 
