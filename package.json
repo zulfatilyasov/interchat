@@ -17,7 +17,8 @@
     "connect-livereload":"latest"
   },
   "scripts":{
-    "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build; node server"
+    "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build;",
+    "start": "node server"
   },
   "engin": "node 0.10.31"
 }
