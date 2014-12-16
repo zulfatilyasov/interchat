@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700"/>
     <title>InterChat</title>
   </head>
-  <body>
+  <body ng-app="app" ng-controller="chatRoom as vm">
     <div class="rooms">
       <h1>Комнаты</h1>
       <ul class="room-list">
@@ -23,7 +23,7 @@
       </ul>
     </div>
     <div class="room-header">
-      <h1>Коридор</h1>
+      <h1 ng-bind-html="vm.room.title"> </h1>
     </div>
     <div class="message-box">
       <div class="input">
@@ -360,6 +360,20 @@
         <div class="date">16.12.2014</div>
       </div>
     </div>
+    <script src="http://vk.com/js/api/xd_connection.js?2"></script>
+    <script>
+      VK.init(function(){
+        VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
+          if (data.response) { 
+            consolel.log(data.response)
+          // data.response is object 
+          } 
+        }); 
+        console.log('api initialized')
+        });
+    </script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="assets/scripts.js"></script>
   </body>
 </html>

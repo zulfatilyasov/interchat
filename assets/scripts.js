@@ -1,18 +1,1 @@
-var Circle, x;
-
-x = function() {
-  return console.log('hello world');
-};
-
-Circle = (function() {
-  function Circle() {
-    this.variable = 12;
-  }
-
-  Circle.prototype.hello = function() {
-    return alert('hello world');
-  };
-
-  return Circle;
-
-})();
+var app;app=angular.module("app",["ngSanitize"]),app.controller("chatRoom",[function(){this.room={title:"Кухня"}}]),app.run(function(){});

@@ -1,8 +1,12 @@
-x= ->
-  console.log 'hello world'
+app = angular.module("app", [
+  'ngSanitize'
+])
 
-class Circle
-  constructor: ->
-    @variable = 12
-  hello: ->
-    alert 'hello world'
+app.controller('chatRoom',[() ->
+      @room = 
+        title:'Кухня'
+
+      return
+    ])
+
+app.run () ->
