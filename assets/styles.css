@@ -1,0 +1,151 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+html,
+body,
+.container-fluid,
+.row,
+.col-xs-1,
+.col-xs-11,
+.rooms,
+.room-members {
+  height: 100%;
+}
+div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+.row.header {
+  height: 50px;
+}
+h1 {
+  font-size: 12px;
+  margin: 0;
+  color: #65737e;
+}
+.rooms {
+  width: 120px;
+  position: fixed;
+  left: 0;
+  background-color: #232830;
+}
+.rooms h1 {
+  color: #4f5b66;
+  font-size: 12px;
+  margin: 10px 0 0 7px;
+}
+.rooms .room-list {
+  list-style: none;
+  padding: 0px 0 0 0;
+  margin: 0;
+}
+.rooms .room-list .room {
+  padding: 3px 15px;
+}
+.rooms .room-list .room a {
+  color: #65737e;
+}
+.rooms .room-list .room:hover {
+  background: #2b303b;
+  cursor: pointer;
+}
+.rooms .room-list .room:hover a {
+  color: #c0c5ce;
+  text-decoration: none;
+}
+.room-header {
+  position: fixed;
+  top: 0;
+  left: 120px;
+  width: 100%;
+  height: 30px;
+  background-color: #1c1f26;
+}
+.room-header h1 {
+  margin: 8px auto;
+  width: 200px;
+  text-transform: uppercase;
+}
+.message-box {
+  position: fixed;
+  bottom: 0;
+  left: 120px;
+  width: 100%;
+  height: 50px;
+  background-color: #1c1f26;
+  z-index: 10;
+}
+.message-box .input,
+.message-box .button {
+  float: left;
+  display: inline-block;
+}
+.message-box .input {
+  width: 60%;
+}
+.message-box .input textarea {
+  width: 100%;
+  background-color: #1c1f26;
+  outline: none;
+  border: none;
+  color: #c0c5ce;
+  padding: 8px;
+  font-size: 12px;
+  resize: none;
+}
+.message-box .button {
+  width: 21%;
+  height: 100%;
+  color: #8db5b4;
+  font-size: 14px;
+  padding: 15px 25px;
+}
+.message-box .button:hover {
+  background-color: #343d46;
+}
+.chat {
+  position: fixed;
+  margin: 30px 0 50px 120px;
+  background-color: #2b303b;
+  padding-bottom: 60px;
+  width: 100%;
+  height: 100%;
+  padding-right: 120px;
+  overflow: scroll;
+}
+.message {
+  color: #c0c5ce;
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+  font-size: 12px;
+}
+.message .ava,
+.message .name-and-text,
+.message .date {
+  float: left;
+  display: inline-block;
+}
+.message .ava {
+  width: 60px;
+  height: 70px;
+  padding: 5px 0 0 2px;
+}
+.message .name-and-text {
+  width: 70%;
+  padding-right: 10px;
+}
+.message .name-and-text .name {
+  color: #c97050;
+}
+.message .name-and-text .text {
+  margin: 5px 0;
+}
+.message .date {
+  width: 65px;
+  color: #a3be8c;
+}
