@@ -3,5 +3,5 @@ var app = express();
 var path = require('path');
 
 app.use(express.static(__dirname));
-app.listen(3000);
-console.log('Listening on port 3000');
+app.listen(80);
+console.log('Listening on port 80');
