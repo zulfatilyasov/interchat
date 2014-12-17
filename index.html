@@ -362,13 +362,19 @@
     </div>
     <script src="https://vk.com/js/api/xd_connection.js?2"></script>
     <script>
+      var uri = encodeURIComponent(window.location.href);
+      console.log('uri: ' uri);
       VK.init(function(){
         VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
-          if (data.response) { 
-            console.log(data.response)
+          console.log(data);
+          //- if (data.response) { 
+            //- console.log(data.response)
           // data.response is object 
-          } 
-        }); 
+          //- } 
+        },function(){
+            console.log(arguments);
+         }
+        ); 
         console.log('api initialized')
         });
     </script>
