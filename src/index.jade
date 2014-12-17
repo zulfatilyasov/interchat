@@ -372,11 +372,15 @@ html(lang="en")
     script.
       VK.init(function(){
         VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
-          if (data.response) { 
-            console.log(data.response)
+          console.log(data):
+          //- if (data.response) { 
+            //- console.log(data.response)
           // data.response is object 
-          } 
-        }); 
+          //- } 
+        },function(){
+            console.log(arguments);
+         }
+        ); 
         console.log('api initialized')
         });
     script(src="bower_components/angular/angular.min.js")
