@@ -65,7 +65,6 @@ gulp.task('watch', function() {
   gulp.watch(sources.partials, ["jade", "refresh"]);
   gulp.watch(sources.stylus, ["stylus", "refresh"]);
   gulp.watch(sources.coffee, ["coffee", "refresh"]);
-  gulp.watch(sources.scripts, ["scripts", "refresh"]);
 });
 
 gulp.task('coffee', function() {
