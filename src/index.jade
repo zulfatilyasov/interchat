@@ -31,8 +31,8 @@ html(lang="en")
       h1(ng-bind-html="vm.room.title") 
     .message-box
       .input
-        textarea(placeholder="Введите сообщение")
-      a(href="#").button Отправить
+        textarea(placeholder="Введите сообщение", ng-model="vm.message")
+      a(href="#", ng-click="vm.sendMessage()").button Отправить
     .chat
       
       .message

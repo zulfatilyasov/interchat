@@ -27,8 +27,8 @@
     </div>
     <div class="message-box">
       <div class="input">
-        <textarea placeholder="Введите сообщение"></textarea>
-      </div><a href="#" class="button">Отправить</a>
+        <textarea placeholder="Введите сообщение" ng-model="vm.message"></textarea>
+      </div><a href="#" ng-click="vm.sendMessage()" class="button">Отправить</a>
     </div>
     <div class="chat">
       <div class="message">
