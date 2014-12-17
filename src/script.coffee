@@ -3,7 +3,7 @@ app = angular.module("app", [
 ])
 
 app.controller('chatRoom',['$http', ($http) ->
-      url = 'https://api.vk.com/method/users.get?user_id='+window.params['viewer_id']+'&access_token='+window.params['access_token'];
+      url = window.params['?api_url']+'/method/users.get?user_id='+window.params['viewer_id']+'&access_token='+window.params['access_token'];
       console.log url
 
       $http.get(url)
