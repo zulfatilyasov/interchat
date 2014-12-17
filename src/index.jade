@@ -369,6 +369,9 @@ html(lang="en")
     //- script(src="client/bower_components/jquery/dist/jquery.min.js")
     //- script(src="client/bower_components/bootstrap/dist/js/bootstrap.min.js")
     script(src="https://vk.com/js/api/xd_connection.js?2")
+    script(src="bower_components/angular/angular.min.js")
+    script(src="bower_components/angular-sanitize/angular-sanitize.min.js")
+    script(src='assets/scripts.js')
     script.
       window.params = window.location.search.split('&').map(function(i) { 
           return i.split('=');
@@ -377,19 +380,18 @@ html(lang="en")
           return memo;
       }, {});
       console.log(window.params);
+
       VK.init(function(){
+        app.run(function(){});
         VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
           console.log(data);
-          //- if (data.response) { 
-            //- console.log(data.response)
-          // data.response is object 
-          //- } 
         },function(){
             console.log(arguments);
          }
         ); 
         console.log('api initialized')
-        });
-    script(src="bower_components/angular/angular.min.js")
-    script(src="bower_components/angular-sanitize/angular-sanitize.min.js")
-    script(src='assets/scripts.js')
+        },
+          function(){
+            app.run(function(){});
+          }
+        );

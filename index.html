@@ -361,25 +361,32 @@
       </div>
     </div>
     <script src="https://vk.com/js/api/xd_connection.js?2"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="assets/scripts.js"></script>
     <script>
-      var uri = decodeURIComponent(window.location.href);
-      console.log('uri: ' + uri);
+      window.params = window.location.search.split('&').map(function(i) { 
+          return i.split('=');
+      }).reduce(function(memo, i) { 
+          memo[i[0]] = i[1] == +i[1] ? parseFloat(i[1],10) : decodeURIComponent(i[1]); 
+          return memo;
+      }, {});
+      console.log(window.params);
+      
       VK.init(function(){
+        app.run(function(){});
         VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
           console.log(data);
-          //- if (data.response) { 
-            //- console.log(data.response)
-          // data.response is object 
-          //- } 
         },function(){
             console.log(arguments);
          }
         ); 
         console.log('api initialized')
-        });
+        },
+          function(){
+            app.run(function(){});
+          }
+        );
     </script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="assets/scripts.js"></script>
   </body>
 </html>

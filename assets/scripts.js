@@ -1,1 +1,1 @@
-var app;app=angular.module("app",["ngSanitize"]),app.controller("chatRoom",[function(){this.room={title:"Кухня"}}]),app.run(function(){});
+var app;app=angular.module("app",["ngSanitize"]),app.controller("chatRoom",["$http",function(o){var e;e="https://api.vk.com/method/users.get?user_id="+window.params.viewer_id+"&access_token="+window.params.access_token,console.log(e),o.get(e).success(function(o){return console.log(o)}).error(function(){return console.log(arguments)}),this.room={title:"Кухня"}}]),app.run(function(){});
