@@ -58,8 +58,7 @@ app.value('params',window.params)
 
 app.value('config',
     {
-      production:true  
-    }
+      production:true }
   )
 
 app.factory 'vkapi',
