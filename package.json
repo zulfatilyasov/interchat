@@ -2,21 +2,22 @@
   "name": "inter-chat",
   "author": "Zulfat Ilyasov",
   "dependencies": {
-    "bower":"latest",
+    "bower": "latest",
+    "connect-livereload": "latest",
+    "express": "latest",
     "gulp": "latest",
-    "gulp-livereload": "^2.1.1",
-    "gulp-util": "latest",
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
-    "gulp-stylus": "latest",
+    "gulp-livereload": "^2.1.1",
     "gulp-rename": "latest",
-    "jeet": "latest",
-    "nib": "latest",
+    "gulp-stylus": "latest",
     "gulp-uglify": "latest",
-    "express":"latest",
-    "connect-livereload":"latest"
+    "gulp-util": "latest",
+    "jeet": "latest",
+    "mongodb": "^1.4.23",
+    "nib": "latest"
   },
-  "scripts":{
+  "scripts": {
     "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build;",
     "start": "node server"
   },
