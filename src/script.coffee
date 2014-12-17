@@ -10,13 +10,14 @@ app.controller('chatRoom',['$http','vkapi', ($http, vkapi) ->
       vkapi.getFriends window.params['viewer_id']
         .then (data) ->
           console.log data
-          
+
       @room = 
         title:'Кухня'
 
       return
     ])
-angular.value('params',window.params)
+
+angular.module('app').value('params',window.params)
 
 angular.module('app').factory 'vkapi',
   ['params','$q', (params, $q) ->
