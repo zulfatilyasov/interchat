@@ -8,7 +8,7 @@ app.factory 'stub',
       [{
         first_name:'Зульфат',
         last_name:'Ильясов'
-        photo_50:'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
+        photo_50:'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
         uid: 54464144
       }]
 
@@ -21,7 +21,7 @@ app.factory 'stub',
           domain: 'alex.moskalyuk'
           photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg'
           online: 0
-        } 
+        }
         {
           id: 10741
           first_name: 'Александром'
@@ -48,7 +48,7 @@ app.controller('chatRoom',['$http','vkapi', ($http, vkapi) ->
         .then (data) ->
           console.log data
 
-      @room = 
+      @room =
         title:'Кухня'
 
       return
@@ -67,7 +67,7 @@ app.factory 'vkapi',
     getUser = (userIds) ->
       defer = $q.defer()
       if config.production
-        VK.api("users.get", {user_ids:userIds, fields:'photo_50'}, (data) -> 
+        VK.api("users.get", {user_ids:userIds, fields:'photo_50'}, (data) ->
           if data.response then defer.resolve data.response else defer.reject()
           return
           )
@@ -79,7 +79,7 @@ app.factory 'vkapi',
     getFriends = (userId) ->
       defer = $q.defer()
       if config.production
-        VK.api("friends.get", {user_id:userId, fields:'photo_50'}, (data) -> 
+        VK.api("friends.get", {user_id:userId, fields:'photo_50'}, (data) ->
           if data.response then defer.resolve data.response else defer.reject()
           return
         )
