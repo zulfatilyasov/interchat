@@ -370,8 +370,10 @@ html(lang="en")
     //- script(src="client/bower_components/bootstrap/dist/js/bootstrap.min.js")
     script(src="https://vk.com/js/api/xd_connection.js?2")
     script.
-      var uri = encodeURIComponent(window.location.href);
-      console.log('uri: ' uri);
+
+
+      var uri = decodeURIComponent(window.location.href);
+      console.log('uri: ' + uri);
       VK.init(function(){
         VK.api('video.get',{videos: '-4363_136089719,13245770_137352259'},function(data) { 
           console.log(data);
