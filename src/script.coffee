@@ -2,23 +2,6 @@ app = angular.module("app", [
   'ngSanitize'
 ])
 
-app.controller('chatRoom',['$http','vkapi', ($http, vkapi) ->
-      vkapi.getUser window.params['viewer_id']
-        .then (data) ->
-          console.log data
-
-      vkapi.getFriends window.params['viewer_id']
-        .then (data) ->
-          console.log data
-
-      @room = 
-        title:'Кухня'
-
-      return
-    ])
-
-app.value('params',window.params)
-
 app.factory 'stub',
   ['$q', ($q) ->
     getUser = ->
@@ -56,13 +39,35 @@ app.factory 'stub',
      
   ]
 
+app.controller('chatRoom',['$http','vkapi', ($http, vkapi) ->
+      vkapi.getUser window.params['viewer_id']
+        .then (data) ->
+          console.log data
+
+      vkapi.getFriends window.params['viewer_id']
+        .then (data) ->
+          console.log data
+
+      @room = 
+        title:'Кухня'
+
+      return
+    ])
+
+app.value('params',window.params)
+
+app.value('config',
+    {
+      production:true  
+    }
+  )
+
 app.factory 'vkapi',
-  ['params','$q', 'stub', (params, $q, stub) ->
-    prod = window.location.host.indexOf('vk.com') isnt -1
+  ['params','$q', 'config', 'stub', (params, $q, config, stub) ->
 
     getUser = (userIds) ->
       defer = $q.defer()
-      if prod
+      if config.production
         VK.api("users.get", {user_ids:userIds, fields:'photo_50'}, (data) -> 
           if data.response then defer.resolve data.response else defer.reject()
           return
@@ -74,7 +79,7 @@ app.factory 'vkapi',
 
     getFriends = (userId) ->
       defer = $q.defer()
-      if prod
+      if config.production
         VK.api("friends.get", {user_id:userId, fields:'photo_50'}, (data) -> 
           if data.response then defer.resolve data.response else defer.reject()
           return

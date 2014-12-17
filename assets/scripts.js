@@ -2,22 +2,6 @@ var app;
 
 app = angular.module("app", ['ngSanitize']);
 
-app.controller('chatRoom', [
-  '$http', 'vkapi', function($http, vkapi) {
-    vkapi.getUser(window.params['viewer_id']).then(function(data) {
-      return console.log(data);
-    });
-    vkapi.getFriends(window.params['viewer_id']).then(function(data) {
-      return console.log(data);
-    });
-    this.room = {
-      title: 'Кухня'
-    };
-  }
-]);
-
-app.value('params', window.params);
-
 app.factory('stub', [
   '$q', function($q) {
     var getFriends, getUser;
@@ -57,14 +41,33 @@ app.factory('stub', [
   }
 ]);
 
+app.controller('chatRoom', [
+  '$http', 'vkapi', function($http, vkapi) {
+    vkapi.getUser(window.params['viewer_id']).then(function(data) {
+      return console.log(data);
+    });
+    vkapi.getFriends(window.params['viewer_id']).then(function(data) {
+      return console.log(data);
+    });
+    this.room = {
+      title: 'Кухня'
+    };
+  }
+]);
+
+app.value('params', window.params);
+
+app.value('config', {
+  production: true
+});
+
 app.factory('vkapi', [
-  'params', '$q', 'stub', function(params, $q, stub) {
-    var getFriends, getUser, prod;
-    prod = window.location.host.indexOf('vk.com') !== -1;
+  'params', '$q', 'config', 'stub', function(params, $q, config, stub) {
+    var getFriends, getUser;
     getUser = function(userIds) {
       var defer;
       defer = $q.defer();
-      if (prod) {
+      if (config.production) {
         VK.api("users.get", {
           user_ids: userIds,
           fields: 'photo_50'
@@ -83,7 +86,7 @@ app.factory('vkapi', [
     getFriends = function(userId) {
       var defer;
       defer = $q.defer();
-      if (prod) {
+      if (config.production) {
         VK.api("friends.get", {
           user_id: userId,
           fields: 'photo_50'
