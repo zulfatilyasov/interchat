@@ -18,7 +18,7 @@ app.controller('chatRoom', [
         params.first_name = data[0].first_name;
         params.photo_50 = data[0].photo_50;
         return $http.get('/api/rooms?uid=' + params.uid).success(function(data) {
-          vm.rooms = data.rooms;
+          vm.rooms = data && data.rooms ? data.rooms : [];
           return vm.isLoading = false;
         });
       }

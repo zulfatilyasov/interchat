@@ -20,8 +20,8 @@ app.controller('chatRoom',['$http','$rootScope', 'vkapi', 'params','$timeout', (
             params.photo_50 = data[0].photo_50
             $http.get('/api/rooms?uid='+params.uid)
               .success((data)->
-                vm.rooms = data.rooms
-                vm.isLoading = false;
+                vm.rooms = if data and data.rooms then data.rooms else []
+                vm.isLoading = false
                 )
 
       vkapi.getFriends params.viewer_id
@@ -93,8 +93,8 @@ app.controller('chatRoom',['$http','$rootScope', 'vkapi', 'params','$timeout', (
       vm.openRoom = (room) ->
         vm.roomId = room.id
         getRoomMessages()
-        socket.emit('changeRoom', room.id);
-        vm.showRoomForm = false;
+        socket.emit('changeRoom', room.id)
+        vm.showRoomForm = false
 
       vm.sendMessage = ->
         doc =
