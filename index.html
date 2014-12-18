@@ -30,30 +30,24 @@
         <textarea placeholder="Введите сообщение" ng-model="vm.message"></textarea>
       </div><a href="#" ng-click="vm.sendMessage()" class="button">Отправить</a>
     </div>
-    <div class="chat">
-      <div ng-repeat="msg in vm.chat" class="message"> 
-        <div class="ava"><img ng-src="{{msg.author.imgUrl}}" alt=""/></div>
-        <div class="name-and-text">
-          <div class="name"><a href="" ng-bind-html="msg.author.lastName + ' ' + msg.author.firstName" class="name"></a></div>
-          <p ng-bind-html="msg.text" class="text"></p>
+    <div id="chat" class="chat">
+      <div class="chat-wrap">
+        <div ng-repeat="msg in vm.chat" class="message"> 
+          <div class="ava"><img ng-src="{{msg.author.imgUrl}}" alt=""/></div>
+          <div class="name-and-text">
+            <div class="name"><a href="" ng-bind-html="msg.author.lastName + ' ' + msg.author.firstName" class="name"></a></div>
+            <p ng-bind-html="msg.text" class="text"></p>
+          </div>
+          <div class="date">{{msg.timestamp | date:'dd.MM.yy HH:mm'}}</div>
         </div>
-        <div class="date">{{msg.timestamp | date:'dd.MM.yy HH:mm'}}</div>
       </div>
     </div>
     <script src="https://vk.com/js/api/xd_connection.js?2"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="assets/scripts.js"></script>
     <script>
-      window.params = window.location.search.split('&').map(function(i) { 
-          return i.split('=');
-      }).reduce(function(memo, i) { 
-          memo[i[0]] = i[1] == +i[1] ? parseFloat(i[1],10) : decodeURIComponent(i[1]); 
-          return memo;
-      }, {});
-      
-      console.log(window.params);
-      
       VK.init(function(){
           app.run(function(){});
           console.log('api initialized')

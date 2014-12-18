@@ -65,6 +65,7 @@ h1 {
   width: 100%;
   height: 30px;
   background-color: #1c1f26;
+  display: none;
 }
 .room-header h1 {
   margin: 8px auto;
@@ -104,20 +105,21 @@ h1 {
   color: #8db5b4;
   font-size: 14px;
   padding: 15px 25px;
+  border-left: 1px solid #8db5b4;
 }
 .message-box .button:hover {
   background-color: #343d46;
 }
 .chat {
   position: fixed;
-  bottom: 30px;
-  padding-top: 40px;
+  top: 0;
   margin: 0 0 0 120px;
   background-color: #2b303b;
-  width: 100%;
-  height: 100%;
-  padding-right: 120px;
+  height: 465px;
   overflow: scroll;
+}
+.chat .chat-wrap {
+  min-width: 472px;
 }
 .message {
   color: #c0c5ce;

@@ -35,20 +35,22 @@ html(lang="en")
         textarea(placeholder="Введите сообщение", ng-model="vm.message")
       a(href="#", ng-click="vm.sendMessage()").button Отправить
 
-    .chat
-      .message(ng-repeat="msg in vm.chat") 
-        .ava
-          img(ng-src="{{msg.author.imgUrl}}", alt="")
-        .name-and-text
-          .name
-            a.name(href="",ng-bind-html="msg.author.lastName + ' ' + msg.author.firstName")
-          p.text(ng-bind-html="msg.text")
-        .date {{msg.timestamp | date:'dd.MM.yy HH:mm'}}
+    .chat#chat
+      .chat-wrap
+        .message(ng-repeat="msg in vm.chat") 
+          .ava
+            img(ng-src="{{msg.author.imgUrl}}", alt="")
+          .name-and-text
+            .name
+              a.name(href="",ng-bind-html="msg.author.lastName + ' ' + msg.author.firstName")
+            p.text(ng-bind-html="msg.text")
+          .date {{msg.timestamp | date:'dd.MM.yy HH:mm'}}
 
     
     //- script(src="client/bower_components/jquery/dist/jquery.min.js")
     //- script(src="client/bower_components/bootstrap/dist/js/bootstrap.min.js")
     script(src="https://vk.com/js/api/xd_connection.js?2")
+    script(src='/socket.io/socket.io.js')
     script(src="bower_components/angular/angular.min.js")
     script(src="bower_components/angular-sanitize/angular-sanitize.min.js")
     script(src='assets/scripts.js')

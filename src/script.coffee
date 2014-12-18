@@ -8,8 +8,8 @@ app.factory 'stub',
       [{
         first_name:'Зульфат'
         last_name:'Ильясов'
-        photo_50:'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
-        uid: 54464144
+        photo_50:'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
+        uid: Math.floor Math.random()*100
       }]
 
     getFriends = ->
@@ -19,7 +19,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Москалюком'
           domain: 'alex.moskalyuk'
-          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg'
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg'
           online: 0
         }
         {
@@ -27,7 +27,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Мынзой'
           domain: 'alexminza'
-          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ]
@@ -39,7 +39,7 @@ app.factory 'stub',
      
   ]
 
-app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
+app.controller('chatRoom',['$http','$rootScope', 'vkapi', 'params','$timeout', ($http, $rootScope, vkapi, params, $timeout) ->
       vm = @
       vkapi.getUser params.viewer_id
         .then (data) ->
@@ -53,15 +53,28 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
         .then (data) ->
           console.log data
 
+      socket = io(window.location.host)
+      socket.on 'message', (msg) ->
+        if msg.author.uid isnt params.uid
+          $rootScope.$apply ->
+            vm.chat.push msg
+            scrollBottom()
+
       vm.roomId = 'main'
       vm.message = ""
       vm.chat = []
 
+      scrollBottom = ->
+        $timeout(->
+          chatDiv = document.getElementById "chat"
+          chatDiv.scrollTop = chatDiv.scrollHeight + 100
+          )
+
       $http.get('/api/messages?roomId=' + vm.roomId)
         .success((data)->
-          console.log data
           if data and data.messages
             vm.chat = data.messages
+            scrollBottom()
           )
         .error(->
           )
@@ -76,7 +89,7 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
             text:vm.message
             timestamp:now()
             author:
-              _id:params.viewer_id
+              uid:params.uid
               firstName:params.first_name
               lastName:params.last_name
               imgUrl:params.photo_50
@@ -85,6 +98,8 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
           .post('/api/messages', doc)
             .success(->
               vm.chat.push doc.message
+              scrollBottom()
+              return
             )
 
       vm.room =

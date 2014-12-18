@@ -16,7 +16,8 @@
     "gulp-util": "latest",
     "jeet": "latest",
     "mongodb": "^1.4.23",
-    "nib": "latest"
+    "nib": "latest",
+    "socket.io": "^1.2.1"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install; node_modules/.bin/gulp build;",

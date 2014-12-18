@@ -10,8 +10,8 @@ app.factory('stub', [
         {
           first_name: 'Зульфат',
           last_name: 'Ильясов',
-          photo_50: 'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
-          uid: 54464144
+          photo_50: 'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
+          uid: Math.floor(Math.random() * 100)
         }
       ];
     };
@@ -22,14 +22,14 @@ app.factory('stub', [
           first_name: 'Александром',
           last_name: 'Москалюком',
           domain: 'alex.moskalyuk',
-          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
           online: 0
         }, {
           id: 10741,
           first_name: 'Александром',
           last_name: 'Мынзой',
           domain: 'alexminza',
-          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ];
@@ -42,8 +42,8 @@ app.factory('stub', [
 ]);
 
 app.controller('chatRoom', [
-  '$http', 'vkapi', 'params', function($http, vkapi, params) {
-    var now, vm;
+  '$http', '$rootScope', 'vkapi', 'params', '$timeout', function($http, $rootScope, vkapi, params, $timeout) {
+    var now, scrollBottom, socket, vm;
     vm = this;
     vkapi.getUser(params.viewer_id).then(function(data) {
       if (data.length && data[0].uid) {
@@ -56,13 +56,29 @@ app.controller('chatRoom', [
     vkapi.getFriends(params.viewer_id).then(function(data) {
       return console.log(data);
     });
+    socket = io(window.location.host);
+    socket.on('message', function(msg) {
+      if (msg.author.uid !== params.uid) {
+        return $rootScope.$apply(function() {
+          vm.chat.push(msg);
+          return scrollBottom();
+        });
+      }
+    });
     vm.roomId = 'main';
     vm.message = "";
     vm.chat = [];
+    scrollBottom = function() {
+      return $timeout(function() {
+        var chatDiv;
+        chatDiv = document.getElementById("chat");
+        return chatDiv.scrollTop = chatDiv.scrollHeight + 100;
+      });
+    };
     $http.get('/api/messages?roomId=' + vm.roomId).success(function(data) {
-      console.log(data);
       if (data && data.messages) {
-        return vm.chat = data.messages;
+        vm.chat = data.messages;
+        return scrollBottom();
       }
     }).error(function() {});
     now = function() {
@@ -76,7 +92,7 @@ app.controller('chatRoom', [
           text: vm.message,
           timestamp: now(),
           author: {
-            _id: params.viewer_id,
+            uid: params.uid,
             firstName: params.first_name,
             lastName: params.last_name,
             imgUrl: params.photo_50
@@ -84,7 +100,8 @@ app.controller('chatRoom', [
         }
       };
       return $http.post('/api/messages', doc).success(function() {
-        return vm.chat.push(doc.message);
+        vm.chat.push(doc.message);
+        scrollBottom();
       });
     };
     vm.room = {
@@ -92,6 +109,15 @@ app.controller('chatRoom', [
     };
   }
 ]);
+
+window.params = window.location.search.split('&').map(function(i) {
+  return i.split('=');
+}).reduce(function(memo, i) {
+  memo[i[0]] = i[1] === +i[1] ? parseFloat(i[1], 10) : decodeURIComponent(i[1]);
+  return memo;
+}, {});
+
+console.log(window.params);
 
 app.value('params', window.params || {
   "api_url": "https://api.vk.com/api.php",
@@ -117,9 +143,9 @@ app.value('params', window.params || {
 });
 
 if (window.params && window.params.api_id) {
-  console.log('dev');
-} else {
   console.log('production');
+} else {
+  console.log('dev');
 }
 
 app.value('config', {
