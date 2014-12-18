@@ -14,18 +14,12 @@ html(lang="en")
     .rooms
       h1 Комнаты
       ul.room-list
-        li.room
-          a(href="") Общая
-        li.room
-          a(href="") Зал
-        li.room
-          a(href="") Кухня
-        li.room
-          a(href="") Коридор
-        li.room
-          a(href="") Спальня
-        li.room
-          a(href="",ng-click="vm.showRoomForm = true") Добавить
+        li.room(ng-class="{selected:vm.roomId == 'main'}", ng-click="vm.openRoom({id:'main'})")
+          a(href="javascript:void(0)") Общая
+        li.room(ng-class="{selected:vm.roomId == room.id}", ng-repeat="room in vm.rooms", ng-click="vm.openRoom(room)" )
+          a(href="javascript:void(0)", ng-bind-html="room.title")
+        li.room(ng-click="vm.showRoomForm = true")
+          a(href="javascript:void(0)") Добавить
 
     .room-header
       h1(ng-bind-html="vm.room.title") 
@@ -52,23 +46,24 @@ html(lang="en")
       .friends
         .h2 Выберите друзей для общения в комнате
         .friend(ng-repeat="friend in vm.friends")
-          input(type="checkbox", ng-model="friend.inRoom", id="{{friend.id}}")
-          label.name(for="{{friend.id}}", ng-bind-html="friend.first_name + ' ' + friend.last_name")
+          input(type="checkbox", ng-model="friend.inRoom", id="{{friend.uid}}")
+          label.name(for="{{friend.uid}}", ng-bind-html="friend.first_name + ' ' + friend.last_name")
           br
     .actions(ng-show="vm.showRoomForm")
+       a.save(href="javascript:void(0)", ng-click="vm.createRoom()").button.noselect Сохранить
        a(href="javascript:void(0)", ng-click="vm.showRoomForm = false").button.noselect Отмена
-       a(href="javascript:void(0)", ng-click="vm.createRoom()").button.noselect Сохранить
 
-
-
-
-
+    .overlay(ng-show="vm.isLoading")
+      .loading
+        span(us-spinner="{color:'#fff'}")
     
     //- script(src="client/bower_components/jquery/dist/jquery.min.js")
     script(src="https://vk.com/js/api/xd_connection.js?2")
     script(src='/socket.io/socket.io.js')
     script(src="bower_components/angular/angular.min.js")
     script(src="bower_components/angular-sanitize/angular-sanitize.min.js")
+    script(src="bower_components/spin.js/spin.js")
+    script(src="bower_components/angular-spinner/angular-spinner.min.js")
     script(src='assets/scripts.js')
     script(src='assets/services.js')
     script.

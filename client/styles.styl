@@ -36,7 +36,8 @@ h1
       a
         color #65737E
         font-size 14px
-
+      &.selected
+        background #2B303B
       &:hover
         background #2B303B
         cursor pointer
@@ -108,6 +109,7 @@ h1
   min-width 487px
 
 .room-form
+  padding-bottom 30px
   .title
     width 220px
     margin 0 auto  
@@ -130,8 +132,24 @@ h1
 
   .actions
     z-index 100 
-        
-
+    .save
+      width 44%
+      border-left none
+.overlay
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background #2B303B
+  z-index 100000
+  .loading
+    position absolute
+    width 50px
+    height 50px
+    top 50%
+    left 50%
+    margin -25px 0 0 -25px
 .message
   color #C0C5CE
   display inline-block

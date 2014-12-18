@@ -6,6 +6,7 @@
     "bower": "latest",
     "connect-livereload": "latest",
     "express": "latest",
+    "guid": "0.0.12",
     "gulp": "latest",
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
@@ -17,6 +18,7 @@
     "jeet": "latest",
     "mongodb": "^1.4.23",
     "nib": "latest",
+    "node-promise": "^0.5.10",
     "socket.io": "^1.2.1"
   },
   "scripts": {

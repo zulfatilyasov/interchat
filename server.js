@@ -12,8 +12,10 @@ app.get('/', function(req, resp) {
 });
 
 app.get('/api/messages', function(req, resp) {
-  if(!req.query || !req.query.roomId)
+  if(!req.query || !req.query.roomId){
     resp.send('validation error', 400);
+    return;
+  }
 
   var room = req.query.roomId;
   dbcontext.getRoomMessages(room, function(err, result) {
@@ -24,13 +26,47 @@ app.get('/api/messages', function(req, resp) {
 });
 
 app.post('/api/messages', function(req, resp) {
-  if(!req.body || !req.body.roomId || !req.body.message)
+  if(!req.body || !req.body.roomId || !req.body.message){
     resp.send('validation error', 400);
+    return;
+  }
 
   dbcontext.insertMessage(req.body.roomId, req.body.message, function(err, result) {
     if(result && result.length)
-      io.emit('message', result[0]);
+      io.sockets.in(req.body.roomId).emit('message', result[0]);
     resp.send(201);
+  });
+});
+
+app.post('/api/rooms', function(req, resp) {
+  console.log(req.body);
+  if(!req.body || !req.body.roomTitle || !req.body.users) {
+    resp.send('validation error', 400);
+    return;
+  }
+
+  dbcontext.createRoom(req.body.roomTitle, req.body.users, function(err, result) {
+    if(err!=null){
+      resp.send(400);
+      console.log(err);
+    }
+    else{
+      resp.json(result);
+    }
+  });
+});
+
+app.get('/api/rooms',function(req, resp) {
+  if(!req.query || !req.query.uid){
+    resp.sendStatus(400);
+    return;
+  }
+  dbcontext.getUserRooms(req.query.uid, function(err, rooms) {
+    if(err!=null) {
+      resp.sendStatus(400);
+      return;
+    }
+    resp.json(rooms);
   });
 });
 
@@ -41,5 +77,12 @@ var server = app.listen(app.get('port'), function() {
 var io = require('socket.io').listen(server);
 
 io.on('connection', function (socket) {
+  socket.room = 'main';
+  socket.join('main');
 
+  socket.on('changeRoom', function(newroom){
+    socket.leave(socket.room);
+    socket.join(newroom);
+    socket.room = newroom;
+  });
 });

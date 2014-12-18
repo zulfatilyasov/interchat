@@ -1,3 +1,5 @@
+var getRandomId;
+
 window.params = window.location.search.split('&').map(function(i) {
   return i.split('=');
 }).reduce(function(memo, i) {
@@ -97,6 +99,10 @@ angular.module("app").factory('authInterceptor', [
   }
 ]);
 
+getRandomId = function() {
+  return Math.floor(Math.random() * 100);
+};
+
 app.factory('stub', [
   '$q', function($q) {
     var getFriends, getUser;
@@ -106,21 +112,189 @@ app.factory('stub', [
           first_name: 'Зульфат',
           last_name: 'Ильясов',
           photo_50: 'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
-          uid: Math.floor(Math.random() * 100)
+          uid: 33
         }
       ];
     };
     getFriends = function() {
       return [
         {
-          id: 153796,
+          uid: getRandomId(),
           first_name: 'Александром',
           last_name: 'Москалюком',
           domain: 'alex.moskalyuk',
           photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
           online: 0
         }, {
-          id: 10741,
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Мынзой',
+          domain: 'alexminza',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
+          first_name: 'Александром',
+          last_name: 'Москалюком',
+          domain: 'alex.moskalyuk',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          online: 0
+        }, {
+          uid: getRandomId(),
           first_name: 'Александром',
           last_name: 'Мынзой',
           domain: 'alexminza',

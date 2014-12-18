@@ -14,12 +14,9 @@
     <div class="rooms">
       <h1>Комнаты</h1>
       <ul class="room-list">
-        <li class="room"><a href="">Общая</a></li>
-        <li class="room"><a href="">Зал</a></li>
-        <li class="room"><a href="">Кухня</a></li>
-        <li class="room"><a href="">Коридор</a></li>
-        <li class="room"><a href="">Спальня</a></li>
-        <li class="room"><a href="" ng-click="vm.showRoomForm = true">Добавить</a></li>
+        <li ng-class="{selected:vm.roomId == 'main'}" ng-click="vm.openRoom({id:'main'})" class="room"><a href="javascript:void(0)">Общая</a></li>
+        <li ng-class="{selected:vm.roomId == room.id}" ng-repeat="room in vm.rooms" ng-click="vm.openRoom(room)" class="room"><a href="javascript:void(0)" ng-bind-html="room.title"></a></li>
+        <li ng-click="vm.showRoomForm = true" class="room"><a href="javascript:void(0)">Добавить</a></li>
       </ul>
     </div>
     <div class="room-header">
@@ -49,16 +46,21 @@
       <div class="friends">
         <div class="h2">Выберите друзей для общения в комнате</div>
         <div ng-repeat="friend in vm.friends" class="friend">
-          <input type="checkbox" ng-model="friend.inRoom" id="{{friend.id}}"/>
-          <label for="{{friend.id}}" ng-bind-html="friend.first_name + ' ' + friend.last_name" class="name"></label><br/>
+          <input type="checkbox" ng-model="friend.inRoom" id="{{friend.uid}}"/>
+          <label for="{{friend.uid}}" ng-bind-html="friend.first_name + ' ' + friend.last_name" class="name"></label><br/>
         </div>
       </div>
     </div>
-    <div ng-show="vm.showRoomForm" class="actions"><a href="javascript:void(0)" ng-click="vm.showRoomForm = false" class="button noselect">Отмена</a><a href="javascript:void(0)" ng-click="vm.createRoom()" class="button noselect">Сохранить</a></div>
+    <div ng-show="vm.showRoomForm" class="actions"><a href="javascript:void(0)" ng-click="vm.createRoom()" class="save button noselect">Сохранить</a><a href="javascript:void(0)" ng-click="vm.showRoomForm = false" class="button noselect">Отмена</a></div>
+    <div ng-show="vm.isLoading" class="overlay">
+      <div class="loading"><span us-spinner="{color:'#fff'}"></span></div>
+    </div>
     <script src="https://vk.com/js/api/xd_connection.js?2"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
     <script src="assets/scripts.js"></script>
     <script src="assets/services.js"></script>
     <script>
