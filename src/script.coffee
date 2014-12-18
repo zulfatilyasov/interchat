@@ -93,6 +93,15 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
       return
     ])
 
+window.params =
+  window.location.search.split('&').map((i) ->
+    i.split('=')
+  ).reduce((memo, i) ->
+    memo[i[0]] = if i[1] == +i[1] then parseFloat(i[1],10) else decodeURIComponent(i[1])
+    memo
+  , {})
+
+console.log(window.params)
 
 app.value('params',
   window.params or
@@ -120,10 +129,10 @@ app.value('params',
   })
 
 if window.params and window.params.api_id
-  console.log 'dev'
-else
   console.log 'production'
-  
+else
+  console.log 'dev'
+
 app.value('config', production: if window.params and window.params.api_id then true else false)
 
 app.factory 'vkapi',
