@@ -56,11 +56,11 @@ app.post('/api/messages', function(req, resp) {
 });
 
 var server = app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'));
+  console.log("app is running at localhost:" + app.get('port'));
 });
 
 var io = require('socket.io').listen(server);
 
 io.on('connection', function (socket) {
-  console.log('user connected');
+
 });

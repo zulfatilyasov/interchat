@@ -33,7 +33,7 @@ html(lang="en")
     .message-box
       .input
         textarea(placeholder="Введите сообщение", ng-model="vm.message")
-      a(href="#", ng-click="vm.sendMessage()").button Отправить
+      a(href="#", ng-click="vm.sendMessage()").button.noselect Отправить
 
     .chat#chat
       .chat-wrap

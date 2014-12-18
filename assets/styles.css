@@ -106,9 +106,21 @@ h1 {
   font-size: 14px;
   padding: 15px 25px;
   border-left: 1px solid #8db5b4;
+  outline: none;
 }
 .message-box .button:hover {
   background-color: #343d46;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .chat {
   position: fixed;
@@ -119,7 +131,7 @@ h1 {
   overflow: scroll;
 }
 .chat .chat-wrap {
-  min-width: 472px;
+  min-width: 487px;
 }
 .message {
   color: #c0c5ce;

@@ -86,8 +86,17 @@ h1
     font-size 14px
     padding 15px 25px
     border-left 1px solid #8db5b4
+    outline none
     &:hover
       background-color #343D46
+      
+.noselect
+  -webkit-touch-callout none
+  -webkit-user-select none
+  -khtml-user-select none
+  -moz-user-select none
+  -ms-user-select none
+  user-select none
 
 .chat
   position fixed
@@ -97,7 +106,7 @@ h1
   height 465px
   overflow scroll
   .chat-wrap
-    min-width 472px
+    min-width 487px
 
 .message
   color #C0C5CE
