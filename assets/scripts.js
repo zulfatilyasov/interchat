@@ -10,7 +10,7 @@ app.factory('stub', [
         {
           first_name: 'Зульфат',
           last_name: 'Ильясов',
-          photo_50: 'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
+          photo_50: 'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
           uid: 54464144
         }
       ];
@@ -22,14 +22,14 @@ app.factory('stub', [
           first_name: 'Александром',
           last_name: 'Москалюком',
           domain: 'alex.moskalyuk',
-          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg',
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
           online: 0
         }, {
           id: 10741,
           first_name: 'Александром',
           last_name: 'Мынзой',
           domain: 'alexminza',
-          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ];
@@ -59,12 +59,18 @@ app.controller('chatRoom', [
     vm.roomId = 'main';
     vm.message = "";
     vm.chat = [];
+    $http.get('/api/messages?roomId=' + vm.roomId).success(function(data) {
+      console.log(data);
+      if (data && data.messages) {
+        return vm.chat = data.messages;
+      }
+    }).error(function() {});
     now = function() {
       return new Date().getTime();
     };
     vm.sendMessage = function() {
-      var message;
-      message = {
+      var doc;
+      doc = {
         roomId: vm.roomId,
         message: {
           text: vm.message,
@@ -77,8 +83,8 @@ app.controller('chatRoom', [
           }
         }
       };
-      return $http.post('/api/messages', message).success(function() {
-        return vm.chat.push(message);
+      return $http.post('/api/messages', doc).success(function() {
+        return vm.chat.push(doc.message);
       });
     };
     vm.room = {
@@ -111,7 +117,7 @@ app.value('params', window.params || {
 });
 
 app.value('config', {
-  production: true
+  production: window.params ? true : false
 });
 
 app.factory('vkapi', [

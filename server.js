@@ -4,14 +4,15 @@ var app = express();
 var mongo = require('mongodb').MongoClient;
 var uri = "mongodb://zulfat:518009@ds043927.mongolab.com:43927/inter-chat";
 var db = null;
+
 mongo.connect(uri, function(err, database) {
   if(err){
     console.log("error: unable to connect to db") 
   }
   db = database;
-  db.collection('main').findOne({}, function(err, item) {
-    console.log(item);
-  });
+  // db.collection('main').findOne({}, function(err, item) {
+  //   console.log(item);
+  // });
 });
 
 app.use(bodyParser.urlencoded());
@@ -24,13 +25,22 @@ app.get('/', function(request, response) {
 
 });
 
-app.get('/api/messages', function(req, res) {
+app.get('/api/messages', function(req, resp) {
+  console.log(req.query);
+  var room = req.query.roomId;
+  db.collection(room).find().toArray(function(err, result) {
+    console.log(result);
+    resp.json({
+      messages:result
+    });
+  })
 
 });
 
-app.post('/api/messages', function(req, res) {
+app.post('/api/messages', function(req, resp) {
   db.collection(req.body.roomId).insert(req.body.message, function(err, result) {
-    console.log(arguments);
+    resp.send(201);
+    // console.log(arguments);
   });
 });
 

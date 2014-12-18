@@ -8,7 +8,7 @@ app.factory 'stub',
       [{
         first_name:'Зульфат'
         last_name:'Ильясов'
-        photo_50:'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
+        photo_50:'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
         uid: 54464144
       }]
 
@@ -19,7 +19,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Москалюком'
           domain: 'alex.moskalyuk'
-          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg'
+          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg'
           online: 0
         }
         {
@@ -27,7 +27,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Мынзой'
           domain: 'alexminza'
-          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ]
@@ -57,11 +57,20 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
       vm.message = ""
       vm.chat = []
 
+      $http.get('/api/messages?roomId=' + vm.roomId)
+        .success((data)->
+          console.log data
+          if data and data.messages
+            vm.chat = data.messages
+          )
+        .error(->
+          )
+
       now = ->
         new Date().getTime()
 
       vm.sendMessage = ->
-        message = 
+        doc = 
           roomId:vm.roomId
           message:
             text:vm.message
@@ -73,9 +82,9 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
               imgUrl:params.photo_50
 
         $http
-          .post('/api/messages', message)
+          .post('/api/messages', doc)
             .success(->
-              vm.chat.push(message)
+              vm.chat.push doc.message
             )
 
       vm.room =
@@ -110,7 +119,7 @@ app.value('params',
     "hash":""
   })
 
-app.value('config', production:true)
+app.value('config', production: if window.params then true else false)
 
 app.factory 'vkapi',
   ['params','$q', 'config', 'stub', (params, $q, config, stub) ->

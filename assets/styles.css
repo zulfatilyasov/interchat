@@ -137,7 +137,7 @@ h1 {
   padding: 5px 0 0 2px;
 }
 .message .name-and-text {
-  width: 70%;
+  width: 65%;
   padding-right: 10px;
 }
 .message .name-and-text .name {
@@ -147,6 +147,6 @@ h1 {
   margin: 5px 0;
 }
 .message .date {
-  width: 65px;
+  width: 85px;
   color: #a3be8c;
 }
