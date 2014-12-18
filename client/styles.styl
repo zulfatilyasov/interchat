@@ -1,4 +1,4 @@
-body
+body,html, button, input, select, textarea
   font-family: 'Open Sans', sans-serif;
 
 html, body, .container-fluid, .row, .col-xs-1,.col-xs-11, .rooms, .room-members
@@ -57,7 +57,7 @@ h1
     width 200px
     text-transform uppercase
 
-.message-box
+.message-box, .actions
   position fixed
   bottom 0
   left 120px
@@ -89,7 +89,7 @@ h1
     outline none
     &:hover
       background-color #343D46
-      
+
 .noselect
   -webkit-touch-callout none
   -webkit-user-select none
@@ -98,15 +98,39 @@ h1
   -ms-user-select none
   user-select none
 
-.chat
+.chat,.room-form
   position fixed
   top 0
   margin 0 0 0 120px 
   background-color #2B303B
-  height 465px
-  overflow scroll
-  .chat-wrap
-    min-width 487px
+  height 467px
+  overflow auto
+  min-width 487px
+
+.room-form
+  .title
+    width 220px
+    margin 0 auto  
+    input
+      background #2B303B
+      border none
+      outline none
+      height 30px
+      border-bottom 1px solid #8DB5B4
+      text-align center
+      color #fff
+
+  .friends
+    color #C0C5CE
+    margin 20px 0 0 30px
+    .friend
+      .name
+        display inline-block
+        margin-left 5px
+
+  .actions
+    z-index 100 
+        
 
 .message
   color #C0C5CE

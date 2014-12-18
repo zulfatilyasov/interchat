@@ -10,9 +10,9 @@ var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
 
 var sources = {
-  jade: "./src/**/*.jade",
-  stylus: "./src/**/*.styl",
-  coffee:"./src/**/*.coffee",
+  jade: "./client/**/*.jade",
+  stylus: "./client/**/*.styl",
+  coffee:"./client/**/*.coffee",
   scripts: "./assets/**/*.js"
 };
 
@@ -68,9 +68,8 @@ gulp.task('watch', function() {
 });
 
 gulp.task('coffee', function() {
-  gulp.src('./src/**/*.coffee')
+  gulp.src('./client/**/*.coffee')
       .pipe(coffee({bare: true}))
-      .pipe(rename('scripts.js'))
       .pipe(gulp.dest('./assets'))
 });
 // Refresh task. Depends on Jade task completion
