@@ -8,7 +8,7 @@ app.factory 'stub',
       [{
         first_name:'Зульфат'
         last_name:'Ильясов'
-        photo_50:'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
+        photo_50:'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg'
         uid: 54464144
       }]
 
@@ -19,7 +19,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Москалюком'
           domain: 'alex.moskalyuk'
-          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg'
+          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg'
           online: 0
         }
         {
@@ -27,7 +27,7 @@ app.factory 'stub',
           first_name: 'Александром'
           last_name: 'Мынзой'
           domain: 'alexminza'
-          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ]
@@ -70,7 +70,7 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
         new Date().getTime()
 
       vm.sendMessage = ->
-        doc = 
+        doc =
           roomId:vm.roomId
           message:
             text:vm.message
@@ -94,7 +94,7 @@ app.controller('chatRoom',['$http','vkapi', 'params', ($http, vkapi, params) ->
     ])
 
 
-app.value('params', 
+app.value('params',
   window.params or
   {
     "api_url":"https://api.vk.com/api.php"
@@ -119,7 +119,12 @@ app.value('params',
     "hash":""
   })
 
-app.value('config', production: if window.params then true else false)
+if window.params and window.params.api_id
+  console.log 'dev'
+else
+  console.log 'production'
+  
+app.value('config', production: if window.params and window.params.api_id then true else false)
 
 app.factory 'vkapi',
   ['params','$q', 'config', 'stub', (params, $q, config, stub) ->
@@ -153,7 +158,7 @@ app.factory 'vkapi',
     }
   ]
 
-angular.module("app").factory 'authInterceptor', 
+angular.module("app").factory 'authInterceptor',
   ['params', (params) ->
     authKey = params.auth_key
     request: (config) ->

@@ -10,7 +10,7 @@ app.factory('stub', [
         {
           first_name: 'Зульфат',
           last_name: 'Ильясов',
-          photo_50: 'http://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
+          photo_50: 'https://cs416831.vk.me/v416831144/86fe/iS1kFAazifc.jpg',
           uid: 54464144
         }
       ];
@@ -22,14 +22,14 @@ app.factory('stub', [
           first_name: 'Александром',
           last_name: 'Москалюком',
           domain: 'alex.moskalyuk',
-          photo_50: 'http://pp.vk.me/...96/e_b0bdca6e.jpg',
+          photo_50: 'https://pp.vk.me/...96/e_b0bdca6e.jpg',
           online: 0
         }, {
           id: 10741,
           first_name: 'Александром',
           last_name: 'Мынзой',
           domain: 'alexminza',
-          photo_50: 'http://pp.vk.me/...41/e_62a98b6e.jpg',
+          photo_50: 'https://pp.vk.me/...41/e_62a98b6e.jpg',
           online: 0
         }
       ];
@@ -116,8 +116,14 @@ app.value('params', window.params || {
   "hash": ""
 });
 
+if (window.params && window.params.api_id) {
+  console.log('dev');
+} else {
+  console.log('production');
+}
+
 app.value('config', {
-  production: window.params ? true : false
+  production: window.params && window.params.api_id ? true : false
 });
 
 app.factory('vkapi', [
