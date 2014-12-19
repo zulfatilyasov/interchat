@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var md5 = require('MD5');
 var app = express();
 var dbcontext = require('./dbcontext');
 app.use(bodyParser.urlencoded());
@@ -7,6 +8,19 @@ app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/'));
 
+var appSecret = '4B8QDwGqJLVtgWEDymVg';
+var appId = '4683043';
+
+function isAuthenticated(req, resp, next) {
+  var authKey = req.get('Auth-Key');
+  var viewerId = req.get('Viewer-Id');
+  console.log(viewerId);
+  console.log(authKey);
+  var correctAuthKey = md5(appId+'_'+viewerId+'_'+appSecret);
+  if(correctAuthKey === authKey)
+    next();
+}
+app.use(isAuthenticated);
 app.get('/', function(req, resp) {
   resp.sendfile(__dirname + '/index.html');
 });

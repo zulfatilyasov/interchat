@@ -2,6 +2,7 @@
   "name": "inter-chat",
   "author": "Zulfat Ilyasov",
   "dependencies": {
+    "MD5": "^1.2.1",
     "body-parser": "^1.10.0",
     "bower": "latest",
     "connect-livereload": "latest",
