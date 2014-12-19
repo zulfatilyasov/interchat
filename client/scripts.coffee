@@ -88,6 +88,7 @@ app.controller('chatRoom',['$http','$rootScope', 'vkapi', 'params','$timeout', (
          )
         .success((data)->
           vm.rooms.push data
+          VK.callMethod "showInviteBox"
           )
 
       vm.openRoom = (room) ->

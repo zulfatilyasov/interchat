@@ -14,8 +14,6 @@ var appId = '4683043';
 function isAuthenticated(req, resp, next) {
   var authKey = req.get('Auth-Key');
   var viewerId = req.get('Viewer-Id');
-  console.log(viewerId);
-  console.log(authKey);
   var correctAuthKey = md5(appId+'_'+viewerId+'_'+appSecret);
   if(correctAuthKey === authKey)
     next();
