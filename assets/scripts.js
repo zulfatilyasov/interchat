@@ -97,6 +97,7 @@ app.controller('chatRoom', [
         users: selectedFriends
       }).success(function(data) {
         vm.rooms.push(data);
+        vm.openRoom(data.id);
         return VK.callMethod("showInviteBox");
       });
     };

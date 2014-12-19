@@ -18,7 +18,7 @@ html(lang="en")
           a(href="javascript:void(0)") Общая
         li.room(ng-class="{selected:vm.roomId == room.id}", ng-repeat="room in vm.rooms", ng-click="vm.openRoom(room)" )
           a(href="javascript:void(0)", ng-bind-html="room.title")
-        li.room(ng-click="vm.showRoomForm = true")
+        li.room(ng-class="{selected:vm.showRoomForm}",ng-click="vm.showRoomForm = true")
           a(href="javascript:void(0)") Добавить
 
     .room-header
